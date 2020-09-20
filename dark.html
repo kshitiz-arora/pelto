@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WHEN IS IT?</title>
+</head>
+
+<style>
+	
+	body {
+		background-image: url('images/posters/first-01.jpeg'); 
+		background-position: center top;
+		background-size: 530px 848px;
+	}
+
+	.seasons .button {
+		background-color: black;
+		color: white;
+  		padding: 15px 188px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		cursor: pointer;
+		float: left;
+		opacity: 0.6;
+		
+	}
+	.seasons .button:hover {
+		background-color: black;
+		opacity:0.9
+	}
+
+	#myImageButton {
+		position: fixed;
+		bottom: 90px;
+		left:34%;
+		height: 20px;
+		width: 50px;
+	}
+
+	.myInstructions {
+		position: fixed;
+		top: 70px;
+		background-color: black;
+		color: white;
+		opacity: 0.8;
+		border-color: grey;
+
+	}
+</style>
+
+<body onload="show_alert()">
+	<!--
+	<p><img src="clear.png" alt="Season 1" style="float:left;width:140px;height:42px;" onclick="check()">Image1</p>
+	
+	<map name="Switch Worlds">
+		<area shape="rect" coords="34,44,270,350" onclick="change()">
+	</map>
+-->
+	
+	<div class="seasons">
+		
+		<button class="button" onclick="surf_back()"><b>Previous Season</b></button>
+		<button class="button" onclick="season_page()"><b>Know More</b></button>
+		<button class="button" onclick="surf_forward()"><b>Next Season</b></button>
+
+	</div>
+
+	<p style="clear:both"></p>
+
+	
+	<dialog id="instructions" class="myInstructions">
+		<u><b style="font-size: 30px">Here are all the instructions.</b></u><br>
+		<ul>
+			<li><b style="font-size: 20px">Top 3 buttons:</b>
+				<dl>
+					<dt style="font-size: 18px;">Previous Season</dt>
+					<dd>takes you to previous season</dd>
+					<dt style="font-size: 18px;">Know More</dt>
+					<dd>shows more info about current season</dd>
+					<dt style="font-size: 18px;">Next Season</dt>
+					<dd>takes you to next season</dd>
+				</dl>
+			</li>
+			<li style="font-size: 20px">This dialog can be <b>toggled</b> by again clicking <br>on "DARK" written in bottom center of the page.</li>
+		</ul>
+	</dialog>
+	
+
+	<div id="myImageButton">
+	<img src="clear.png" height="100" width="450" title="Click" onclick="Dialog()"></img>
+	</div>
+	<!--
+	<button onclick="shuffle()">
+		SHUFFLE
+	</button>-->
+
+	<script>
+		var images = ['images/posters/first-01.jpeg', 'images/posters/second.jpg'];
+		var count = 0;
+		function change(){
+			if (count%3==0)	document.body.style.backgroundImage = "url('images/posters/second.jpg')";
+			if (count%3==1)	document.body.style.backgroundImage = "url('images/posters/third-01.jpeg')";
+			if (count%3==2)	document.body.style.backgroundImage = "url('images/posters/first-01.jpeg')";
+			document.body.style.backgroundPosition = "centre top";
+			document.body.style.backgroundSize = "530px 848px";
+			count++;
+		}
+		function shuffle(){
+			for(i=0; i<10; i++){
+				change();
+				setTimeout(function(){}, i*1000)
+			}
+		}
+		function surf_back(){
+			if (count%3==1)	{
+				document.body.style.backgroundImage = "url('images/posters/first-01.jpeg')";
+				count--;
+			}
+			else if (count%3==2) {
+				document.body.style.backgroundImage = "url('images/posters/second.jpg')";
+				count--;
+			}
+			else if (count%3==0) alert("This is the first season!");
+		}
+		function surf_forward(){
+			if (count%3==0)	{
+				document.body.style.backgroundImage = "url('images/posters/second.jpg')";
+				count++;
+			}
+			else if (count%3==1) {
+				document.body.style.backgroundImage = "url('images/posters/third-01.jpeg')";
+				count++;
+			}
+			else if (count%3==2) alert("This is the last season!");
+		}
+
+		function check(){
+			alert("clicked");
+		}
+
+		function season_page() {
+			if (count%3==0)	window.open("dark_s1.html", "_blank");
+			if (count%3==1)	window.open("dark_s2.html", "_blank");
+			if (count%3==2)	window.open("dark_s3.html", "_blank");
+		}
+
+
+		var x = document.getElementById("instructions");
+		var d = 0;
+
+		function Dialog() {
+			if (d%2==0){
+				x.show()
+			}
+			else if (d%2==1){
+				x.close()
+			}
+			d++;
+		}
+
+		function show_alert() {
+			setTimeout(function(){alert("Try clicking on 'DARK' at the bottom center of the page")}, 1000)
+		}
+
+	</script>
+</body>
+</html>
